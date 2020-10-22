@@ -1,0 +1,5 @@
+{
+    "android_icon": "/res/icon/smod_icon.png",
+    "android_name": "SMOD",
+    "android_handler": "skill-smod.jarbasskills.home"
+}
