@@ -56,8 +56,15 @@ class SMODSkill(MediaCollectionSkill):
 
     def calc_final_score(self, phrase, base_score, match_level):
         score = base_score
-        if self.voc_match(phrase, "smod"):
+        if self.voc_match(phrase, "doom") and self.voc_match(phrase, "stoner"):
+            score += 0.5
+        elif self.voc_match(phrase, "doom"):
             score += 0.15
+        elif self.voc_match(phrase, "stoner"):
+            score += 0.15
+        if self.voc_match(phrase, "smod"):
+            score = 1.0
+
         return score
 
 
