@@ -25,6 +25,7 @@ class SMODSkill(VideoCollectionSkill):
         self.media_collection = Collection("smod", logo=self.skill_logo,
                                            db_path=path)
         self.media_type = CPSMatchType.MUSIC
+        self.playback_type = CPSPlayback.AUDIO
 
     def get_intro_message(self):
         self.speak_dialog("intro")
