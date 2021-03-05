@@ -24,7 +24,7 @@ class SMODSkill(VideoCollectionSkill):
         # load video catalog
         self.media_collection = Collection("smod", logo=self.skill_logo,
                                            db_path=path)
-        self.settings["min_duration"] = 20 * 60
+        self.media_type = CPSMatchType.MUSIC
 
     def get_intro_message(self):
         self.speak_dialog("intro")
