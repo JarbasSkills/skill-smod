@@ -8,6 +8,7 @@
 Stoner Doom for mycroft
 
 ![](./gui.png)
+![](./gui.gif)
 
 ## Installation Notes
 
