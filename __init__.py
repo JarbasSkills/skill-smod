@@ -1,27 +1,31 @@
-from ovos_utils.waiting_for_mycroft.common_play import CPSMatchType, \
-    CPSMatchLevel
-from ovos_utils.skills.templates.media_collection import MediaCollectionSkill
+from pyvod import Collection
+from os.path import join, dirname, basename
+from ovos_utils.skills.templates.video_collection import VideoCollectionSkill
 from mycroft.skills.core import intent_file_handler
-from mycroft.util.parse import fuzzy_match, match_one
 from pyvod import Collection, Media
 from os.path import join, dirname, basename
-import random
-from json_database import JsonStorageXDG
+from ovos_utils.playback import CPSMatchType, CPSPlayback, CPSMatchConfidence
 
 
-class SMODSkill(MediaCollectionSkill):
+class SMODSkill(VideoCollectionSkill):
 
     def __init__(self):
         super().__init__("SMOD")
         self.message_namespace = basename(dirname(__file__)) + ".jarbasskills"
+        self.default_image = join(dirname(__file__), "ui", "smod_logo.png")
+        self.skill_logo = join(dirname(__file__), "ui", "smod_icon.png")
+        self.skill_icon = join(dirname(__file__), "ui", "smod_icon.png")
+        self.default_bg = join(dirname(__file__), "ui", "smod_logo.png")
         self.supported_media = [CPSMatchType.GENERIC,
                                 CPSMatchType.VIDEO,
                                 CPSMatchType.MUSIC]
 
         path = join(dirname(__file__), "res", "smod.jsondb")
-        logo = join(dirname(__file__), "res", "smod_logo.png")
         # load video catalog
-        self.media_collection = Collection("smod", logo=logo, db_path=path)
+        self.media_collection = Collection("smod", logo=self.skill_logo,
+                                           db_path=path)
+        self.media_type = CPSMatchType.MUSIC
+        self.playback_type = CPSPlayback.AUDIO
 
     def get_intro_message(self):
         self.speak_dialog("intro")
@@ -31,39 +35,24 @@ class SMODSkill(MediaCollectionSkill):
         self.handle_homescreen(message)
 
     def match_media_type(self, phrase, media_type):
-        match = None
         score = 0
 
-        if self.voc_match(phrase,
-                          "video") or media_type == CPSMatchType.VIDEO:
-            score += 0.1
-            match = CPSMatchLevel.GENERIC
-
-        if self.voc_match(phrase,
-                          "music") or media_type == CPSMatchType.MUSIC:
-            score += 0.1
-            match = CPSMatchLevel.CATEGORY
+        if self.voc_match(phrase, "music") or media_type == CPSMatchType.MUSIC:
+            score += 10
 
         if self.voc_match(phrase, "doom"):
-            score += 0.1
-            match = CPSMatchLevel.CATEGORY
+            score += 25
+
+        if self.voc_match(phrase, "metal"):
+            score += 15
+
+        if self.voc_match(phrase, "stoner"):
+            score += 30
+            if self.voc_match(phrase, "doom"):
+                score += 30
 
         if self.voc_match(phrase, "smod"):
-            score += 0.2
-            match = CPSMatchLevel.TITLE
-
-        return match, score
-
-    def calc_final_score(self, phrase, base_score, match_level):
-        score = base_score
-        if self.voc_match(phrase, "doom") and self.voc_match(phrase, "stoner"):
-            score += 0.5
-        elif self.voc_match(phrase, "doom"):
-            score += 0.15
-        elif self.voc_match(phrase, "stoner"):
-            score += 0.15
-        if self.voc_match(phrase, "smod"):
-            score = 1.0
+            score += 80
 
         return score
 

@@ -1,4 +1,4 @@
-# <img src='./res/icon/smod_icon.png' card_color='#40DBB0' width='50' height='50' style='vertical-align:bottom'/>SMOD Skill
+# <img src='./res/icon/smod_icon.png' card_color='#40DBB0' width='50' height='50' style='vertical-align:bottom'/>Stoned Meadow of Doom Skill
 
 ![](./res/smod_logo.png)
 
@@ -8,6 +8,8 @@
 Stoner Doom for mycroft
 
 ![](./gui.png)
+![](./gui.gif)
+![](./gui2.gif)
 
 ## Installation Notes
 
