@@ -37,20 +37,22 @@ class SMODSkill(VideoCollectionSkill):
     def match_media_type(self, phrase, media_type):
         score = 0
 
-        if self.voc_match(phrase,
-                          "music") or media_type == CPSMatchType.MUSIC:
+        if self.voc_match(phrase, "music") or media_type == CPSMatchType.MUSIC:
             score += 10
 
         if self.voc_match(phrase, "doom"):
-            score += 5
+            score += 25
+
+        if self.voc_match(phrase, "metal"):
+            score += 15
 
         if self.voc_match(phrase, "stoner"):
-            score += 20
+            score += 30
             if self.voc_match(phrase, "doom"):
-                score += 10
+                score += 30
 
         if self.voc_match(phrase, "smod"):
-            score += 50
+            score += 80
 
         return score
 
