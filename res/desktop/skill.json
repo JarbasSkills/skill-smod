@@ -1,0 +1,21 @@
+{
+  "name": "Stoned Meadow of Doom Skill",
+  "skillname": "skill-smod",
+  "authorname": "JarbasSkills",
+  "foldername": "",
+  "url": "https://github.com/JarbasSkills/skill-smod",
+  "branch": "v0.1",
+  "desktopFile": false,
+  "warning": "",
+  "systemDeps": false,
+  "platforms": [
+    "arm",
+    "arm64",
+    "i386",
+    "x86_64",
+    "ia64"
+  ],
+  "examples": [
+    "open stoned meadow of doom", "play stoner doom"
+  ]
+}
