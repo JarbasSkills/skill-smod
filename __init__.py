@@ -26,6 +26,7 @@ class SMODSkill(VideoCollectionSkill):
                                            db_path=path)
         self.media_type = CPSMatchType.MUSIC
         self.playback_type = CPSPlayback.AUDIO
+        self.settings["search_depth"] = 100
 
     def get_intro_message(self):
         self.speak_dialog("intro")
@@ -44,15 +45,17 @@ class SMODSkill(VideoCollectionSkill):
             score += 25
 
         if self.voc_match(phrase, "metal"):
-            score += 15
+            score += 5
 
         if self.voc_match(phrase, "stoner"):
             score += 30
             if self.voc_match(phrase, "doom"):
                 score += 30
+            self.CPS_extend_timeout(1)
 
         if self.voc_match(phrase, "smod"):
             score += 80
+            self.CPS_extend_timeout(1)
 
         return score
 
