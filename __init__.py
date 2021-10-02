@@ -1,8 +1,9 @@
-from mycroft.skills.core import intent_file_handler
-from pyvod import Collection, Media
 from os.path import join, dirname, basename
-from ovos_plugin_common_play.ocp import MediaType, PlaybackType, MatchConfidence
+
+from mycroft.skills.core import intent_file_handler
+from ovos_plugin_common_play.ocp import MediaType, PlaybackType
 from ovos_workshop.skills.video_collection import VideoCollectionSkill
+from pyvod import Collection
 
 
 class SMODSkill(VideoCollectionSkill):
