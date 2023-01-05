@@ -21,8 +21,6 @@ class SMODSkill(OVOSCommonPlaybackSkill):
         self.n_mixes = 5
 
     def initialize(self):
-        bootstrap = f"https://raw.githubusercontent.com/OpenJarbas/streamindex/main/{self.archive.db.name}.json"
-        self.archive.bootstrap_from_url(bootstrap)
         self.archive.setDaemon(True)
         self.archive.start()
         urls = [
