@@ -21,6 +21,8 @@ class SMODSkill(OVOSCommonPlaybackSkill):
         self.n_mixes = 5
 
     def initialize(self):
+        bootstrap = "https://github.com/JarbasSkills/skill-smod/raw/dev/bootstrap.json"
+        self.archive.bootstrap_from_url(bootstrap)
         self.archive.setDaemon(True)
         self.archive.start()
         urls = [
