@@ -23,15 +23,17 @@ class SMODSkill(OVOSCommonPlaybackSkill):
     def initialize(self):
         bootstrap = "https://github.com/JarbasSkills/skill-smod/raw/dev/bootstrap.json"
         self.archive.bootstrap_from_url(bootstrap)
-        self.archive.setDaemon(True)
-        self.archive.start()
+        self.schedule_event(self._sync_db, random.randint(3600, 24 * 3600))
+
+    def _sync_db(self):
         urls = [
             "https://www.youtube.com/c/666MrDoom/videos",
             "https://www.youtube.com/c/StonedMeadowOfDoom2/videos",
             "https://www.youtube.com/c/StonedMeadowOfDoom1993/videos",
             "https://www.youtube.com/channel/UCWf14ZX2SZV4hF-hDVKdGvQ/videos"]
         for url in urls:
-            self.archive.monitor(url)
+            self.archive.parse_videos(url)
+        self.schedule_event(self._sync_db, random.randint(3600, 24*3600))
 
     def match_skill(self, phrase, media_type):
         score = 0
